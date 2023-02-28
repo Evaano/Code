@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: In worst case scenario, sort1 took the longest
+
+sort2 uses: merge sort
+
+How do you know?: In worst case scenario, sort2 was the fastest
+
+sort3 uses: selection sort
+
+How do you know?: In best case scenario, sort 3 took the most amount of time

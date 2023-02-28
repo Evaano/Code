@@ -1,0 +1,4 @@
+discord == 1.7.3
+urllib3 == 1.26.14
+async-timeout == 3.0.1
+pytube == 12.1.2

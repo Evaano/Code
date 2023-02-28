@@ -1,0 +1,2 @@
+Ask user for height of pyramid
+Check if height between 1 to 8, or is an integer or not. If not go back to step 1

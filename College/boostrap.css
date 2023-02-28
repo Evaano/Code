@@ -1,0 +1,24 @@
+body {
+    background-color: rgba(255, 255, 255, 0.468);
+}
+
+img {
+    width: 80%
+}
+
+li {
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.nav-item:hover {
+    background-color: rgba(0, 0, 0, 0.501);
+    opacity: 0.7;
+
+}
+
+.nav-item {
+    margin-top: 10px;
+    margin-right: 20px;
+    padding: 0px;
+}
