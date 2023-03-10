@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+* {
+  margin: 0;
+  padding: 5px;
+  outline: 0;
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+}
+
+body {
+  font-family: sans-serif;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(255, 0, 102, 0.4),
+    rgba(0, 187, 255, 0.5)
+  );
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  opacity: ;
+}
+
+.calculator {
+  height: auto;
+  width: auto;
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 30px black;
+}
+
+#display {
+  height: 150px;
+  width: auto;
+  max-width: 270px;
+  display: flex;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 30px;
+  overflow-x: scroll;
+}
+
+#display::-webkit-scrollbar {
+  height: 3px;
+  display: block;
+}
+
+button {
+  height: 60px;
+  width: 60px;
+  border-radius: 30%;
+  border-style: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+button#equal {
+    height: 130px;
+}
+
+.empty-space {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    color: #fff;
+}
+
+.calculator {
+    background-color: #ff008018;
+}
+
+.calculator #display {
+    color: #0a1e23;
+}
+
+.calculator button#clear {
+    background-color: #EDE7B1;
+    color: #000000;
+}
+
+.calculator button.btn-number {
+    background-color: #A9DEF9;
+    color: #000000;
+}
+
+.calculator button.btn-operator {
+    background-color: #ffd0fb;
+    color: #000000;
+  }
+  
+  .calculator button.btn-equal {
+    background-color: #D3F8E2;
+    color: #000;
+    border-radius: 10%;
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.444);
+    font-size: 30px;
+    font-family: 'Dancing Script', cursive;
+  }

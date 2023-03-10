@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="boostrap.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>Boostrap</title>
   </head>
   <body>
@@ -26,13 +27,15 @@
           <a class="nav-link text-black" href="#">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-black" href="nonboostrap.html">Non Bootstrap</a>
+          <a class="nav-link text-black" href="index.html"
+            >Menu</a
+          >
         </li>
       </ul>
     </div>
 
     <div class="my-4 mx-4">
-        <h3 class="mb-4">My Table?</h3>
+      <h3 class="mb-4">My Table?</h3>
       <table class="table table-striped table-dark">
         <thead>
           <tr>
@@ -64,5 +67,35 @@
         </tbody>
       </table>
     </div>
+
+    <div class="mx-4">
+      <h4>Name</h4>
+      <input type="text" id="value1" placeholder="Enter Your First Name">
+      <input type="text" id="value2" placeholder="Enter Your Last Name"><br>
+      <input class="" type="text" id="value3">
+      <button type="button" class="btn btn-dark" onclick="returnText()">Submit!</button>
+    </div>
+
+    <script>
+      console.log(maths());
+
+      function maths() {
+        var num1 = 1;
+        var num2 = 2;
+
+        return num1 + num2;
+      }
+
+      function test() {
+        alert("Hello, World!");
+      }
+
+      function returnText() {
+        firstName = $('#value1').val(); 
+        lastName = $('#value2').val();
+        $('#value3').val(firstName + " " + lastName);
+      }
+
+    </script>
   </body>
 </html>
