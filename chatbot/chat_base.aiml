@@ -1,0 +1,28 @@
+<aiml version="1.0.1" encoding="UTF-8">
+<!-- basic_chat.aiml -->
+
+    <category>
+      <pattern>DESCRIBE *</pattern>
+      <template>
+        <srai>WHAT IS <star/></srai>
+      </template>
+    </category>
+
+    <category>
+      <pattern>WHAT IS *</pattern>
+      <template>
+        <think>
+          <set name="whatisstar"><star/></set>
+        </think>
+        <condition name="whatisstar">
+          <li value="LONG-TERM KNOWLEDGE">Long-term knowledge is valid every time a programme is run.</li>
+          <li value="SHORT-TERM KNOWLEDGE">Short-term knowledge is only valid for a particular instance or run of a programme.</li>
+          <li value="GENERIC KNOWLEDGE">Generic knowledge is relevant to more than one application or domain.</li>
+          <li value="DOMAIN-SPECIFIC KNOWLEDGE">Domain-specific knowledge is only applicable to one specific application or domain.</li>
+          <li value="A FACT">A fact is a statement which asserts that a relationship holds for an object-subject pair.</li>
+          <li value="A RULE">A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.</li>
+        </condition>
+      </template>
+    </category>
+
+</aiml>
