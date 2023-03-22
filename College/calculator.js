@@ -1,18 +1,20 @@
-const operator = prompt('Enter operator ( either +, -, * or / ): ');
-var number1 = 
-var number2 = 
+const display = document.querySelector("#display");
+const buttons = document.querySelectorAll("button");
 
-let result;
-
-if (operator == '+') {
-    result = number1 + number2;
-}
-else if (operator == '-') {
-    result = number1 - number2;
-}
-else if (operator == '*') {
-    result = number1 * number2;
-}
-else {
-    result = number1 / number2;
-}
+buttons.forEach((item) => {
+    item.onclick = () => {
+        if (item.id == "clear") {
+            display.innerText = "";
+        } else if (item.id == "backspace") {
+            let string = display.innerText.toString();
+            display.innerText = string.substr(0, string.length - 1);
+        } else if (display.innerText != "" && item.id == "equal") {
+            display.innerText = eval(display.innerText);
+        } else if (display.innerText == "" && item.id == "equal") {
+            display.innerText = "Empty!";
+            setTimeout(() => (display.innerText = ""), 2000);
+        } else {
+            display.innerText += item.id;
+        }
+    };
+});

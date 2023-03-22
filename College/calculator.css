@@ -58,8 +58,9 @@ a {
 
 button {
   height: 60px;
+  color: rgba(0, 0, 0, 0.437);
   width: 60px;
-  border-radius: 30%;
+  border-radius: 50%;
   border-style: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -89,27 +90,23 @@ button#equal {
 
 .calculator button#clear {
     background-color: #EDE7B1;
-    color: #000000;
 }
 
 .calculator button.btn-number {
     background-color: #A9DEF9;
-    color: #000000;
 }
 
 .calculator button.btn-operator {
     background-color: #ffd0fb;
-    color: #000000;
   }
   
   .calculator button.btn-equal {
     background-color: #D3F8E2;
-    color: #000;
-    border-radius: 10%;
+    border-radius: 8%;
   }
 
   span {
-    color: rgba(0, 0, 0, 0.444);
     font-size: 30px;
     font-family: 'Dancing Script', cursive;
+    color: rgba(0, 0, 0, 0.437);
   }
