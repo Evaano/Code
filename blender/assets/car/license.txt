@@ -1,0 +1,11 @@
+Model Information:
+* title:	Senna 2018
+* source:	https://sketchfab.com/3d-models/senna-2018-98e3f94d6d0048548b6cdd65cdc68497
+* author:	CARS2024 (https://sketchfab.com/CARS2024)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Senna 2018" (https://sketchfab.com/3d-models/senna-2018-98e3f94d6d0048548b6cdd65cdc68497) by CARS2024 (https://sketchfab.com/CARS2024) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
