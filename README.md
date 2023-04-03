@@ -1,2 +1,2 @@
 # About
-Literally nothing but college, fun, and CS50 programs.
+Literally nothing but college, fun, tutorial projects and CS50 programs.
