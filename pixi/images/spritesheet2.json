@@ -1,0 +1,175 @@
+{
+	"frames": {
+		"Run1.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run2.png": {
+			"frame": {
+				"x": 54,
+				"y": 1,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run3.png": {
+			"frame": {
+				"x": 107,
+				"y": 1,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run4.png": {
+			"frame": {
+				"x": 1,
+				"y": 71,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run5.png": {
+			"frame": {
+				"x": 54,
+				"y": 71,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run6.png": {
+			"frame": {
+				"x": 107,
+				"y": 71,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run7.png": {
+			"frame": {
+				"x": 160,
+				"y": 1,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		},
+		"Run8.png": {
+			"frame": {
+				"x": 160,
+				"y": 71,
+				"w": 51,
+				"h": 68
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 51,
+				"h": 68
+			},
+			"sourceSize": {
+				"w": 51,
+				"h": 68
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet2.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 212,
+			"h": 140
+		},
+		"scale": "1"
+	}
+}
