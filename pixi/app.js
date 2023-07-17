@@ -90,8 +90,8 @@ function setup(loader, resources) {
     runAnimation = new AnimatedSprite(runFrames);
 
     // Set initial positions and scales for the animations
-    idleAnimation.position.set(600, 0);
-    runAnimation.position.set(600, 0);
+    idleAnimation.position.set(600, 600);
+    runAnimation.position.set(600, 600);
     idleAnimation.scale.set(2, 2);
     runAnimation.scale.set(2, 2);
 
@@ -114,12 +114,33 @@ function setup(loader, resources) {
     document.addEventListener('keyup', handleKeyUp);
 }
 
+const startText = new PIXI.Text('Press SPACE to Start Playing (*/ω＼*)', {
+    fill: 0xffffff,
+    fontSize: 36,
+    fontFamily: 'Arial',
+    fontWeight: 'bold'
+});
+startText.anchor.set(0.5);
+startText.position.set(app.screen.width / 2, 100);
+app.stage.addChild(startText);
+
+// Function to hide the start text and start the game
+function startGame() {
+    startText.visible = false;
+    // Add any other necessary logic to start the game
+}
+
 // Set to keep track of pressed keys
 const keys = new Set();
 
 // Event handler for keydown event
 function handleKeyDown(event) {
     keys.add(event.code);
+
+    // Start the game and hide the start text when Spacebar is pressed and the start text is visible
+    if (keys.has('Space') && startText.visible) {
+        startGame();
+    }
 
     // Jump when the spacebar is pressed
     if (keys.has('Space') && !isJumping) {
@@ -191,11 +212,12 @@ function update() {
         // Apply gravity to the vertical velocity
         yVelocity += GRAVITY;
         spriteContainer.y += yVelocity;
+        const FIXED_HEIGHT = 100;
 
         // Check if the sprite has landed on the ground
-        if (spriteContainer.y >= app.screen.height - spriteContainer.height) {
+        if (spriteContainer.y >= FIXED_HEIGHT - spriteContainer.height) {
             // Set the sprite's position to the ground level
-            spriteContainer.y = app.screen.height - spriteContainer.height;
+            spriteContainer.y = FIXED_HEIGHT - spriteContainer.height;
             isJumping = false;
             yVelocity = 0;
 
