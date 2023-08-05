@@ -1,0 +1,109 @@
+<aiml version="2.0">
+
+    <category>
+      <pattern>DESCRIBE *</pattern>
+    <template>
+        <srai>WHAT IS <star/></srai>
+    </template>
+    </category>
+
+	<category>
+      <pattern>TELL ME ABOUT *</pattern>
+    <template>
+        <srai>WHAT IS <star/></srai>
+    </template>
+    </category>
+
+    <category>
+      <pattern>WHAT IS * MYBOT</pattern>
+    <template>
+        <srai>WHAT IS <star/></srai>
+    </template>
+    </category>
+
+    <category>
+      <pattern>WHAT IS *</pattern>
+    <template>
+        <think>
+        <set name="whatisstar"><star/></set>
+        </think>
+        <condition name="whatisstar">
+        <li value="long-term knowledge">Long-term knowledge is valid every time a programme is run.</li>
+        <li value="short-term knowledge">Short-term knowledge is only valid for a particular instance or run of a programme.</li>
+        <li value="generic knowledge">Generic knowledge is relevant to more than one application or domain.</li>
+        <li value="domain-specific knowledge">Domain-specific knowledge is only applicable to one specific application or domain.</li>
+        <li value="a fact">A fact is a statement which asserts that a relationship holds for an object-subject pair.</li>
+        <li value="a rule">A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.</li>
+        <li value="how AIML allows variables in its long-term knowledge">AIML has wildcards and srai for that purpose.</li>
+        </condition>
+    </template>
+    </category>
+
+    <category>
+      <pattern>PLEASE MYBOT *</pattern>
+    <template>
+        <srai><star/></srai>
+    </template>
+    </category>
+
+        <category>
+      <pattern>MYBOT PLEASE *</pattern>
+    <template>
+        <srai><star/></srai>
+    </template>
+    </category>
+
+    <category>
+      <pattern>PLEASE *</pattern>
+    <template>
+        <srai><star/></srai>
+    </template>
+    </category>
+
+    <category>
+      <pattern>Illustrate the concept of *</pattern>
+    <template>
+        <srai>GIVE ME AN EXAMPLE OF <star/></srai>
+    </template>
+    </category>
+
+    <category>
+      <pattern>provide an example of *</pattern>
+    <template>
+        <srai>GIVE ME AN EXAMPLE OF <star/></srai>
+    </template>
+    </category>
+
+    <category>
+      <pattern>GIVE ME AN EXAMPLE OF *</pattern>
+    <template>
+        <think>
+        <set name="whatisstar"><star/></set>
+        </think>
+        <condition name="whatisstar">
+        <li value="long-term domain-specific knowledge">The weight of the different types of birds in the game Angry Birds.</li>
+        <li value="a rule">If isUWEStaff(X) then hasUWEPhone (X).</li>
+        <li value="long-term generic knowledge">The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.</li>
+        <li value="short-term generic knowledge">The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.</li>
+        <li value="short-term domain-specific knowledge">The number of birds that a user has fired in a particular episode of Angry Birds.</li>
+        <li value="a fact">Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.</li>
+        </condition>
+    </template>
+    </category>
+
+    
+
+
+    <category>
+    <pattern>HOW DOES * </pattern>
+    <template>
+        <think>
+        <set name="whatisstar"><star/></set>
+        </think>
+        <condition name="whatisstar">
+        <li value="AIML provide context during a conversation">AIML supports context through the use of the that tag to refer to previous bot answers, and via setting variables such as topic.</li>
+        </condition>
+    </template>
+    </category>
+
+</aiml>
