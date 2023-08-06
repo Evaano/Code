@@ -2,50 +2,76 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 
-def cluster_and_visualise(datafilename, K, featurenames):
-    # Read in the dataset from the file
-    data = np.genfromtxt(datafilename, delimiter=',')
-    fruit_labels = np.genfromtxt('fruit_labels.csv', dtype=str)
-    fruit_label_ids = np.genfromtxt('fruit_label_ids.csv', dtype=int)
+plt.rcParams['font.size'] = 10
 
-    # Run the kmeans algorithm
-    kmeans = KMeans(n_clusters=K, n_init=10)
+def cluster_and_visualise(datafilename, K, featurenames, n_init=30):
+    data = np.genfromtxt(datafilename, delimiter=',')
+
+    kmeans = KMeans(n_clusters=K)
+
     cluster_labels = kmeans.fit_predict(data)
 
-    # Map cluster numbers to fruit names
-    cluster_to_fruit = {}
+    cluster_centers = kmeans.cluster_centers_
+    
+    num_features = len(featurenames)
+
+    fig, axs = plt.subplots(num_features, num_features, figsize=(12, 12))
+
+    cluster_colors = ['red', 'blue', 'green', 'pink', 'lightblue']
+    histogram_colors = ['pink', 'lightblue', 'pink', 'lightblue', 'pink']
+    marker_color = 'black'
+
+    for i, center in enumerate(cluster_centers):
+        for j in range(num_features):
+            for k in range(num_features):
+                if j != k:
+                    axs[j, k].scatter(center[j], center[k], s=50, c=marker_color, marker='X')
+
+    # Add a legend for the cluster centers
+    handles = []
     for i in range(K):
-        cluster_data = data[cluster_labels == i]
-        cluster_fruit_labels = fruit_labels[fruit_label_ids == i]
-        cluster_fruit_name = cluster_fruit_labels[0]
-        cluster_to_fruit[i] = cluster_fruit_name
-
-    # Make a 2D visualisation
-    fig, ax = plt.subplots(figsize=(8, 8))
-    colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k']  # Add more colors as needed
-
-    for i in range(K):
-        cluster_data = data[cluster_labels == i]
-        cluster_fruit_name = cluster_to_fruit[i]
-        ax.scatter(cluster_data[:, 0], cluster_data[:, 1], label=f'{cluster_fruit_name}', c=colors[i], alpha=0.6)
-
-    # Set titles and labels
-    ax.set_title(f'Frooty Patooty - {K} Clusters')
-    ax.set_xlabel(featurenames[0])
-    ax.set_ylabel(featurenames[1])
-    ax.legend()
-
-    # Save the visualisation to a file
-    plt.savefig('myVisualisation.jpg')
-
-    # Return the figure and axis
-    return fig, ax
+        handle = axs[num_features - 1, 0].scatter([], [], s=30, c=[cluster_colors[i]], marker='o', label=f'Cluster {i + 1}')
+        handles.append(handle)
 
 
-if __name__ == "__main__":
-    datafilename = 'fruit_values.csv'
-    K = 3
-    featurenames = ['Um idk like Feature 1', 'Um idk like Feature 2']
+    title_pos = axs[0, 0].get_position().get_points()
+    fig.legend(loc='upper right', bbox_to_anchor=(1, title_pos[1, 1]))
 
-    fig, ax = cluster_and_visualise(datafilename, K, featurenames)
-    plt.show()
+
+    for i in range(num_features):
+        for j in range(num_features):
+            if i == j:
+
+                for k in range(K):
+                    cluster_data = data[cluster_labels == k]
+                    axs[i, j].hist(cluster_data[:, i], bins='auto', color=histogram_colors[k], alpha=0.8)
+
+                axs[i, j].set_xlabel(featurenames[i])
+                axs[i, j].set_ylabel(featurenames[j])
+            else:
+
+                for k in range(K):
+                    cluster_data = data[cluster_labels == k]
+                    axs[i, j].scatter(cluster_data[:, i], cluster_data[:, j], alpha=0.5, c=cluster_colors[k], s=10)
+
+                axs[i, j].set_xlabel(featurenames[i])
+                axs[i, j].set_ylabel(featurenames[j])
+
+    for i in range(num_features):
+        axs[i, 0].set_ylabel(featurenames[i])
+        axs[-1, i].set_xlabel(featurenames[i])
+
+    for ax in axs.flat:
+        ax.label_outer()
+        
+
+    fig.suptitle(f'K-Means Clustering by {",".join(featurenames)} by ei2-rasheed', fontsize=15)
+    fig.text(0.99, 0.01, 'Made by ei2-rasheed', ha='right', va='bottom')
+    plt.subplots_adjust(hspace=0.4, wspace=0.4)
+
+    plt.savefig("myVisualisation.jpg")
+
+    if num_features == 1:
+        return fig, axs[0]
+    else:
+        return fig, axs
