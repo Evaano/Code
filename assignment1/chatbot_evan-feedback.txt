@@ -1,0 +1,7 @@
+<SCORE>0</SCORE>
+<MESSAGE>After removing duplicates, your bot used 5 categories</MESSAGE>
+<MESSAGE>Your bot answered one or more questions incorrectly.</MESSAGE>
+<MESSAGE>File chatbot_evan-responses.txt has more details of your bots responses.</MESSAGE>
+<MESSAGE>Common mistakes are typos or extra spaces</MESSAGE>
+<MESSAGE>For 45 questions your bot did not have a matching category.</MESSAGE>
+<MESSAGE>Your bot answered incorrectly for 3 questions that require a sense of context.</MESSAGE>

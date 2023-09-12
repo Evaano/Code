@@ -12,7 +12,7 @@ def preprocessSingleInput(bot, theInput):
 
 debug = False
 debug2 = False
-theAIMLfile = 'idk.aiml'
+theAIMLfile = 'chatbot_evan.aiml'
 theQuestionsFileName = "coursework-questions-and-responses.txt"
 responsesFileName = theAIMLfile[:-5] + "-responses.txt"
 feedbackFileName = theAIMLfile[:-5] + "-feedback.txt"

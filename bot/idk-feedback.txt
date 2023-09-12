@@ -1,6 +1,7 @@
-<SCORE>43</SCORE>
-<MESSAGE>After removing duplicates, your bot used 13 categories</MESSAGE>
+<SCORE>42</SCORE>
+<MESSAGE>After removing duplicates, your bot used 11 categories</MESSAGE>
 <MESSAGE>Your bot answered one or more questions incorrectly.</MESSAGE>
 <MESSAGE>File idk-responses.txt has more details of your bot's responses.</MESSAGE>
 <MESSAGE>Common mistakes are typos or extra spaces</MESSAGE>
-<MESSAGE>Your bot answered incorrectly for 2 questions that require a sense of context.</MESSAGE>
+<MESSAGE>For 3 questions, your bot did not have a matching category.</MESSAGE>
+<MESSAGE>Your bot answered incorrectly for 3 questions that require a sense of context.</MESSAGE>

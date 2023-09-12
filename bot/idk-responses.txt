@@ -1,69 +1,39 @@
-Q23: Tell me about a rule.
+Q21: Tell me about domain-specific knowledge.
+Expected response: Domain-specific knowledge is only applicable to one specific application or domain.
+Your bot response: Domain-specific knowledge is only applicable to one specific application or domain.
+*** Question answered correctly
+
+Q17: Describe a rule.
 Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 *** Question answered correctly
 
-Q33: Provide an example of short-term domain-specific knowledge.
-Expected response: The number of birds that a user has fired in a particular episode of Angry Birds.
-Your bot response: The number of birds that a user has fired in a particular episode of Angry Birds.
-*** Question answered correctly
-
-Q27: Illustrate the concept of short-term domain-specific knowledge.
-Expected response: The number of birds that a user has fired in a particular episode of Angry Birds.
-Your bot response: The number of birds that a user has fired in a particular episode of Angry Birds.
-*** Question answered correctly
-
-Q31: Provide an example of long-term domain-specific knowledge.
-Expected response: The weight of the different types of birds in the game Angry Birds.
-Your bot response: The weight of the different types of birds in the game Angry Birds.
-*** Question answered correctly
-
-Q36: Please provide an example of a rule.
+Q29: Illustrate the concept of a rule.
 Expected response: If isUWEStaff(X) then hasUWEPhone (X).
 Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
 *** Question answered correctly
 
-Q16: Describe a fact.
-Expected response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
-Your bot response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
+Q 5: What is a rule?
+Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
+Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 *** Question answered correctly
 
-Q11: Give me an example of a fact.
-Expected response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
-Your bot response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
-*** Question answered correctly
-
-Q 6: Give me an example of long-term generic knowledge.
+Q24: Illustrate the concept of long-term generic knowledge.
 Expected response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
 Your bot response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
 *** Question answered correctly
-
-Q26: Illustrate the concept of short-term generic knowledge.
-Expected response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
-Your bot response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
-*** Question answered correctly
-
-Q22: Tell me about a fact.
-Expected response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
-Your bot response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
-*** Question answered correctly
-
-Q34: Please provide an example of a fact.
-Expected response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
-Your bot response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
-*** Question answered correctly
-
-Q35: Why is knowing that useful?
-Expected response: I have no answer for that.
-Your bot response: Because it allows us to make statements that apply to classes of things or questions.
-Question answered incorrectly
 
 Q13: Describe short-term knowledge.
 Expected response: Short-term knowledge is only valid for a particular instance or run of a programme.
 Your bot response: Short-term knowledge is only valid for a particular instance or run of a programme.
 *** Question answered correctly
 
-Q17: Describe a rule.
+Q14: Describe generic knowledge.
+Expected response: Generic knowledge is relevant to more than one application or domain.
+Your bot response: Generic knowledge is relevant to more than one application or domain.
+*** Question answered correctly
+
+Q23: Tell me about a rule.
 Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 *** Question answered correctly
@@ -73,29 +43,59 @@ Expected response: The equations of motion used to calculate the flight-path of 
 Your bot response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
 *** Question answered correctly
 
-Q 5: What is a rule?
-Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
-Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
+Q25: Illustrate the concept of long-term domain-specific knowledge.
+Expected response: The weight of the different types of birds in the game Angry Birds.
+Your bot response: The weight of the different types of birds in the game Angry Birds.
 *** Question answered correctly
 
-Q28: Illustrate the concept of a fact.
+Q34: Please provide an example of a fact.
 Expected response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
 Your bot response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
 *** Question answered correctly
 
-Q20: Tell me about generic knowledge.
-Expected response: Generic knowledge is relevant to more than one application or domain.
-Your bot response: Generic knowledge is relevant to more than one application or domain.
-*** Question answered correctly
+Q35: Why is knowing that useful?
+Expected response: I have no answer for that.
+Your bot response: 
+Question answered incorrectly
 
 Q 0: What is long-term knowledge?
 Expected response: Long-term knowledge is valid every time a programme is run.
 Your bot response: Long-term knowledge is valid every time a programme is run.
 *** Question answered correctly
 
-Q21: Tell me about domain-specific knowledge.
-Expected response: Domain-specific knowledge is only applicable to one specific application or domain.
-Your bot response: Domain-specific knowledge is only applicable to one specific application or domain.
+Q32: Provide an example of short-term generic knowledge.
+Expected response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
+Your bot response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
+*** Question answered correctly
+
+Q18: Tell me about long-term knowledge?
+Expected response: Long-term knowledge is valid every time a programme is run.
+Your bot response: Long-term knowledge is valid every time a programme is run.
+*** Question answered correctly
+
+Q36: Please provide an example of a rule.
+Expected response: If isUWEStaff(X) then hasUWEPhone (X).
+Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
+*** Question answered correctly
+
+Q39: Please myBot what is a rule?
+Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
+Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
+*** Question answered correctly
+
+Q37: What is a rule mybot?
+Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
+Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
+*** Question answered correctly
+
+Q33: Provide an example of short-term domain-specific knowledge.
+Expected response: The number of birds that a user has fired in a particular episode of Angry Birds.
+Your bot response: The number of birds that a user has fired in a particular episode of Angry Birds.
+*** Question answered correctly
+
+Q28: Illustrate the concept of a fact.
+Expected response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
+Your bot response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
 *** Question answered correctly
 
 Q41: Describe how AIML allows variables in its long-term knowledge?
@@ -105,13 +105,8 @@ Your bot response: AIML has wildcards and srai for that purpose.
 
 Q42: Why is knowing that useful?
 Expected response: Because it allows us to make statements that apply to classes of things or questions.
-Your bot response: Because it allows us to make statements that apply to classes of things or questions.
-*** Question answered correctly
-
-Q29: Illustrate the concept of a rule.
-Expected response: If isUWEStaff(X) then hasUWEPhone (X).
-Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
-*** Question answered correctly
+Your bot response: 
+Question answered incorrectly
 
 Q 2: What is generic knowledge?
 Expected response: Generic knowledge is relevant to more than one application or domain.
@@ -123,22 +118,27 @@ Expected response: A fact is a statement which asserts that a relationship holds
 Your bot response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
 *** Question answered correctly
 
-Q18: Tell me about long-term knowledge?
+Q12: Describe long-term knowledge?
 Expected response: Long-term knowledge is valid every time a programme is run.
 Your bot response: Long-term knowledge is valid every time a programme is run.
 *** Question answered correctly
 
-Q40: Mybot please what is a rule?
-Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
-Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
-*** Question answered correctly
-
-Q 7: Give me an example of long-term domain-specific knowledge.
+Q31: Provide an example of long-term domain-specific knowledge.
 Expected response: The weight of the different types of birds in the game Angry Birds.
 Your bot response: The weight of the different types of birds in the game Angry Birds.
 *** Question answered correctly
 
-Q14: Describe generic knowledge.
+Q 3: What is domain-specific knowledge?
+Expected response: Domain-specific knowledge is only applicable to one specific application or domain.
+Your bot response: Domain-specific knowledge is only applicable to one specific application or domain.
+*** Question answered correctly
+
+Q22: Tell me about a fact.
+Expected response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
+Your bot response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
+*** Question answered correctly
+
+Q20: Tell me about generic knowledge.
 Expected response: Generic knowledge is relevant to more than one application or domain.
 Your bot response: Generic knowledge is relevant to more than one application or domain.
 *** Question answered correctly
@@ -155,52 +155,32 @@ Your bot response: AIML supports context through the use of the that tag to refe
 
 Q44: Why is knowing that useful?
 Expected response: The fourth word in this question is an example of how some words can only be understood in context.
-Your bot response: Because it allows us to make statements that apply to classes of things or questions.
+Your bot response: 
 Question answered incorrectly
-
-Q38: Please give me an example of a rule.
-Expected response: If isUWEStaff(X) then hasUWEPhone (X).
-Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
-*** Question answered correctly
-
-Q24: Illustrate the concept of long-term generic knowledge.
-Expected response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
-Your bot response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
-*** Question answered correctly
-
-Q37: What is a rule mybot?
-Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
-Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
-*** Question answered correctly
 
 Q 8: Give me an example of short-term generic knowledge.
 Expected response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
 Your bot response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
 *** Question answered correctly
 
-Q19: Tell me about short-term knowledge.
-Expected response: Short-term knowledge is only valid for a particular instance or run of a programme.
-Your bot response: Short-term knowledge is only valid for a particular instance or run of a programme.
-*** Question answered correctly
-
-Q 3: What is domain-specific knowledge?
-Expected response: Domain-specific knowledge is only applicable to one specific application or domain.
-Your bot response: Domain-specific knowledge is only applicable to one specific application or domain.
-*** Question answered correctly
-
-Q10: Give me an example of a rule.
-Expected response: If isUWEStaff(X) then hasUWEPhone (X).
-Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
-*** Question answered correctly
-
-Q39: Please myBot what is a rule?
+Q40: Mybot please what is a rule?
 Expected response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 Your bot response: A rule is a statement that generates new knowledge by asserting that if one fact is true, then another is also true.
 *** Question answered correctly
 
-Q25: Illustrate the concept of long-term domain-specific knowledge.
-Expected response: The weight of the different types of birds in the game Angry Birds.
-Your bot response: The weight of the different types of birds in the game Angry Birds.
+Q11: Give me an example of a fact.
+Expected response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
+Your bot response: Jim Smith from UWE hasUWEPhoneNumber 0117 3287417.
+*** Question answered correctly
+
+Q 6: Give me an example of long-term generic knowledge.
+Expected response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
+Your bot response: The equations of motion used to calculate the flight-path of a bird in the game Angry Birds.
+*** Question answered correctly
+
+Q38: Please give me an example of a rule.
+Expected response: If isUWEStaff(X) then hasUWEPhone (X).
+Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
 *** Question answered correctly
 
 Q 9: Give me an example of short-term domain-specific knowledge.
@@ -208,19 +188,39 @@ Expected response: The number of birds that a user has fired in a particular epi
 Your bot response: The number of birds that a user has fired in a particular episode of Angry Birds.
 *** Question answered correctly
 
+Q10: Give me an example of a rule.
+Expected response: If isUWEStaff(X) then hasUWEPhone (X).
+Your bot response: If isUWEStaff(X) then hasUWEPhone (X).
+*** Question answered correctly
+
+Q19: Tell me about short-term knowledge.
+Expected response: Short-term knowledge is only valid for a particular instance or run of a programme.
+Your bot response: Short-term knowledge is only valid for a particular instance or run of a programme.
+*** Question answered correctly
+
+Q 7: Give me an example of long-term domain-specific knowledge.
+Expected response: The weight of the different types of birds in the game Angry Birds.
+Your bot response: The weight of the different types of birds in the game Angry Birds.
+*** Question answered correctly
+
+Q16: Describe a fact.
+Expected response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
+Your bot response: A fact is a statement which asserts that a relationship holds for an object-subject pair.
+*** Question answered correctly
+
+Q26: Illustrate the concept of short-term generic knowledge.
+Expected response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
+Your bot response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
+*** Question answered correctly
+
 Q15: Describe domain-specific knowledge.
 Expected response: Domain-specific knowledge is only applicable to one specific application or domain.
 Your bot response: Domain-specific knowledge is only applicable to one specific application or domain.
 *** Question answered correctly
 
-Q12: Describe long-term knowledge?
-Expected response: Long-term knowledge is valid every time a programme is run.
-Your bot response: Long-term knowledge is valid every time a programme is run.
+Q27: Illustrate the concept of short-term domain-specific knowledge.
+Expected response: The number of birds that a user has fired in a particular episode of Angry Birds.
+Your bot response: The number of birds that a user has fired in a particular episode of Angry Birds.
 *** Question answered correctly
 
-Q32: Provide an example of short-term generic knowledge.
-Expected response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
-Your bot response: The date on which a specific episode of Angry Birds is played is generic because it could also be used by another programme.
-*** Question answered correctly
-
- In total you got 43 questions correct
+ In total you got 42 questions correct
