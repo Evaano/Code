@@ -1,0 +1,18 @@
+{
+  "name": "excalibur-test",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8",
+    "vite": "^4.3.2"
+  },
+  "dependencies": {
+    "excalibur": "^0.27.0"
+  }
+}
