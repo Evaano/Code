@@ -24,6 +24,10 @@ conn.execute('''
 conn.commit()
 conn.close()
 
+def back_to_main_menu(window):
+    window.destroy()  # Destroy the current window
+    root.deiconify()
+
 def add_item():
     def add_item_to_database():
         item_code = item_code_entry.get()
@@ -315,6 +319,8 @@ def view_inventory():
 
     tree.pack(fill=tk.BOTH, expand=True)
 
+    back_button = tk.Button(view_inventory_window, text="Back to Main Menu", command=lambda: back_to_main_menu(view_inventory_window))
+    back_button.pack()
 
 def search_item_by_name():
     def search_items(event=None):
@@ -389,6 +395,14 @@ def search_item_by_name():
     search_name_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
     search_name_entry.grid(row=0, column=1, padx=5, pady=5)
     tree.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
+
+    # Create a frame for the "Back" button
+    back_frame = tk.Frame(search_item_window)
+    back_frame.pack()
+
+    # Create a "Back" button to return to the main menu
+    back_button = tk.Button(back_frame, text="Back to Main Menu", command=lambda: back_to_main_menu(search_item_window))
+    back_button.pack()
 
 
 # Create the main window
