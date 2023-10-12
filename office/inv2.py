@@ -16,7 +16,6 @@ conn.execute(
         subcategory TEXT COLLATE NOCASE,
         unit TEXT COLLATE NOCASE,
         brand TEXT COLLATE NOCASE,
-        sto_code TEXT COLLATE NOCASE,
         inwards INTEGER,
         outwards INTEGER,
         current_stock INTEGER,
@@ -27,13 +26,16 @@ conn.execute(
 conn.commit()
 conn.close()
 
+
 def show_inventory_app(start_frame, notebook):
     # This function will be called when the "Proceed to Inventory App" button is clicked.
     start_frame.pack_forget()  # Hide the starting page frame
     notebook.pack(fill="both", expand=True)  # Show the inventory app
 
+
 # Create or connect to the SQLite database with case-insensitive collation
 # (your database creation code goes here)
+
 
 def create_start_page(root, notebook):
     # Create a frame for the starting page
@@ -49,9 +51,7 @@ def create_start_page(root, notebook):
     image_label.pack(pady=20)
 
     # Add introductory text
-    intro_label = tk.Label(
-        start_frame, text="Welcome to the Inventory Management App"
-    )
+    intro_label = tk.Label(start_frame, text="Welcome to the Inventory Management App")
     intro_label.pack(pady=20)
 
     # Add a button to proceed to the inventory app
@@ -63,6 +63,7 @@ def create_start_page(root, notebook):
     proceed_button.pack()
 
     return start_frame
+
 
 def refresh_inventory_tree(tree):
     # Clear the existing items in the Treeview
@@ -83,9 +84,9 @@ def refresh_inventory_tree(tree):
     if items:
         for item in items:
             # Format the "Reorder" value as "True" or "False"
-            reorder_value = "True" if item[10] else "False"
+            reorder_value = "True" if item[9] else "False"
             tree.insert(
-                "", "end", values=item[:10] + (reorder_value,)
+                "", "end", values=item[:9] + (reorder_value,)
             )  # Append formatted "Reorder" value
 
 
@@ -96,7 +97,6 @@ def add_item_to_database(
     subcategory,
     unit,
     brand,
-    sto_code,
     inwards,
     outwards,
     current_stock,
@@ -114,14 +114,39 @@ def add_item_to_database(
         )
         return
 
-    # Insert the new item into the database (you need to adjust the database connection and schema)
+    # Connect to the database
     conn = sqlite3.connect("inventory.db")
     cursor = conn.cursor()
+
+    # Check if the item code or item description already exists
+    cursor.execute("SELECT item_code FROM inventory WHERE item_code=?", (item_code,))
+    existing_item_code = cursor.fetchone()
+    cursor.execute(
+        "SELECT item_description FROM inventory WHERE item_description=?",
+        (item_description,),
+    )
+    existing_item_description = cursor.fetchone()
+
+    if existing_item_code:
+        messagebox.showerror(
+            "Error", f"Item with Item Code {item_code} already exists."
+        )
+        conn.close()
+        return
+
+    if existing_item_description:
+        messagebox.showerror(
+            "Error", f"Item with Item Description '{item_description}' already exists."
+        )
+        conn.close()
+        return
+
+    # Insert the new item into the database
     cursor.execute(
         """
         INSERT INTO inventory
-        (item_code, item_description, category, subcategory, unit, brand, sto_code, inwards, outwards, current_stock, reorder)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (item_code, item_description, category, subcategory, unit, brand, inwards, outwards, current_stock, reorder)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             item_code,
@@ -130,7 +155,6 @@ def add_item_to_database(
             subcategory,
             unit,
             brand,
-            sto_code,
             inwards,
             outwards,
             current_stock,
@@ -140,13 +164,13 @@ def add_item_to_database(
     conn.commit()
     conn.close()
 
-    messagebox.showinfo("Success", f"Added item {item_description} to the inventory.")
+    messagebox.showinfo("Success", f"Added item '{item_description}' to the inventory.")
 
     # Refresh the inventory Treeview after adding a new item
     refresh_inventory_tree(tree)
 
 
-def create_add_item_tab(notebook):
+def create_add_item_tab(notebook, tree):
     # Create a new tab for adding an item
     tab = ttk.Frame(notebook)
     notebook.add(tab, text="Add Item")
@@ -167,8 +191,6 @@ def create_add_item_tab(notebook):
     unit_entry = tk.Entry(tab)
     brand_label = tk.Label(tab, text="Brand (Optional):")
     brand_entry = tk.Entry(tab)
-    sto_code_label = tk.Label(tab, text="STO Code (Optional):")
-    sto_code_entry = tk.Entry(tab)
     inwards_label = tk.Label(tab, text="Inwards:")
     inwards_entry = tk.Entry(tab)
     outwards_label = tk.Label(tab, text="Outwards:")
@@ -186,7 +208,6 @@ def create_add_item_tab(notebook):
         subcategory_label,
         unit_label,
         brand_label,
-        sto_code_label,
         inwards_label,
         outwards_label,
         current_stock_label,
@@ -205,7 +226,6 @@ def create_add_item_tab(notebook):
             subcategory_entry.get(),
             unit_entry.get(),
             brand_entry.get(),
-            sto_code_entry.get(),
             inwards_entry.get(),
             outwards_entry.get(),
             current_stock_entry.get(),
@@ -232,8 +252,6 @@ def create_add_item_tab(notebook):
     unit_entry.grid(row=4, column=1, pady=(0, 0))
     brand_label.grid(row=5, column=0, pady=(0, 0), padx=(padx_left, 0), sticky="w")
     brand_entry.grid(row=5, column=1, pady=(0, 0))
-    sto_code_label.grid(row=6, column=0, pady=(0, 0), padx=(padx_left, 0), sticky="w")
-    sto_code_entry.grid(row=6, column=1, pady=(0, 0))
     inwards_label.grid(row=7, column=0, pady=(0, 0), padx=(padx_left, 0), sticky="w")
     inwards_entry.grid(row=7, column=1, pady=(0, 0))
     outwards_label.grid(row=8, column=0, pady=(0, 0), padx=(padx_left, 0), sticky="w")
@@ -262,7 +280,6 @@ def create_view_inventory_tab(notebook):
             "Subcategory",
             "Unit",
             "Brand",
-            "STO Code",
             "Inwards",
             "Outwards",
             "Current Stock",
@@ -278,7 +295,6 @@ def create_view_inventory_tab(notebook):
     tree.heading("Subcategory", text="Subcategory", anchor="center")
     tree.heading("Unit", text="Unit", anchor="center")
     tree.heading("Brand", text="Brand", anchor="center")  # Added "Brand" heading
-    tree.heading("STO Code", text="STO Code", anchor="center")
     tree.heading("Inwards", text="Inwards", anchor="center")
     tree.heading("Outwards", text="Outwards", anchor="center")
     tree.heading("Current Stock", text="Current Stock", anchor="center")
@@ -291,7 +307,6 @@ def create_view_inventory_tab(notebook):
     tree.column("Subcategory", width=150, anchor="center")
     tree.column("Unit", width=70, anchor="center")
     tree.column("Brand", width=100, anchor="center")
-    tree.column("STO Code", width=70, anchor="center")
     tree.column("Inwards", width=70, anchor="center")
     tree.column("Outwards", width=70, anchor="center")
     tree.column("Current Stock", width=80, anchor="center")
@@ -313,9 +328,9 @@ def create_view_inventory_tab(notebook):
     if items:
         for item in items:
             # Format the "Reorder" value as "True" or "False"
-            reorder_value = "True" if item[10] else "False"
+            reorder_value = "True" if item[9] else "False"
             tree.insert(
-                "", "end", values=item[:10] + (reorder_value,)
+                "", "end", values=item[:9] + (reorder_value,)
             )  # Append formatted "Reorder" value
 
     tree.pack(fill=tk.BOTH, expand=True)
@@ -373,6 +388,7 @@ def create_delete_item_tab(notebook, tree):
     item_code_delete_entry.grid(row=0, column=1, pady=(20, 0))
     delete_button.grid(row=1, columnspan=2, pady=(20, 0), padx=(55, 0))
 
+
 def main():
     # Create the main window
     root = tk.Tk()
@@ -386,11 +402,12 @@ def main():
 
     # Create tabs for different functionality
     tree = create_view_inventory_tab(notebook)  # Assign the created tree widget
-    create_add_item_tab(notebook)
+    create_add_item_tab(notebook, tree)
     create_delete_item_tab(notebook, tree)  # Pass the "tree" to the delete tab
 
     # Start the GUI main loop
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
