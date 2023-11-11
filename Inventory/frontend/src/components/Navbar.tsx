@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Center, Stack } from '@mantine/core';
 import {
     IconHome2,
@@ -21,7 +21,7 @@ const navbarStyles = {
     padding: 'var(--mantine-spacing-md)',
     display: 'flex',
     flexDirection: 'column' as 'column',
-    backgroundColor: 'var(--mantine-color-teal-filled)',
+    backgroundColor: '#67c369',
 };
 
 const navbarMainStyles = {
@@ -30,24 +30,28 @@ const navbarMainStyles = {
 };
 
 const mockdata = [
-    { icon: IconHome2, label: 'Home' },
-    { icon: IconGauge, label: 'Dashboard' },
-    { icon: IconDeviceDesktopAnalytics, label: 'Analytics' },
-    { icon: IconCalendarStats, label: 'Releases' },
-    { icon: IconUser, label: 'Account' },
-    { icon: IconFingerprint, label: 'Security' },
-    { icon: IconSettings, label: 'Settings' },
+    { icon: IconHome2, label: 'Home', path: '/' },
+    { icon: IconGauge, label: 'Inventory', path: '/inventory' },
+    { icon: IconDeviceDesktopAnalytics, label: 'Add New Item', path: '/new-item' },
+    { icon: IconCalendarStats, label: 'Update Items', path: '/update-items' },
+    { icon: IconUser, label: 'Account', path: '/account' },
+    { icon: IconFingerprint, label: 'Security', path: '/security' },
+    { icon: IconSettings, label: 'Settings', path: '/settings' },
 ];
 
-export default function Navbar() {
-    const [active, setActive] = useState(0); // Set the default active index to 0 for the "Home" icon
+const Navbar = () => {
+    const navigate = useNavigate();
+    const [active, setActive] = useState(0);
 
     const links = mockdata.map((link, index) => (
         <NavbarLink
             {...link}
             key={link.label}
             active={index === active}
-            onClick={() => setActive(index)}
+            onClick={() => {
+                setActive(index);
+                navigate(link.path);
+            }}
         />
     ));
 
@@ -69,4 +73,6 @@ export default function Navbar() {
             </Stack>
         </nav>
     );
-}
+};
+
+export default Navbar;
