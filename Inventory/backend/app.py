@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sqlite3
 
@@ -25,10 +25,13 @@ conn.execute(
 )
 conn.commit()
 
-def get_inventory_data():
+def get_inventory_data(category=None):
     conn = sqlite3.connect("inventory.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM inventory")
+    if category:
+        cursor.execute("SELECT * FROM inventory WHERE category = ?", (category,))
+    else:
+        cursor.execute("SELECT * FROM inventory")
     rows = cursor.fetchall()
 
     # Convert rows into a list of dictionaries
@@ -59,7 +62,8 @@ conn.close()
 
 @app.route('/api/inventory', methods=['GET'])
 def get_inventory():
-    inventory_data = get_inventory_data()
+    category = request.args.get('category')
+    inventory_data = get_inventory_data(category)
     return jsonify({"inventory": inventory_data})
 
 if __name__ == '__main__':
