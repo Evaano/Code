@@ -25,13 +25,18 @@ conn.execute(
 )
 conn.commit()
 
-def get_inventory_data(category=None):
+def get_inventory_data(category=None, subcategory=None):
     conn = sqlite3.connect("inventory.db")
     cursor = conn.cursor()
-    if category:
+    if category and subcategory:
+        cursor.execute("SELECT * FROM inventory WHERE category = ? AND subcategory = ?", (category, subcategory))
+    elif category:
         cursor.execute("SELECT * FROM inventory WHERE category = ?", (category,))
+    elif subcategory:
+        cursor.execute("SELECT * FROM inventory WHERE subcategory = ?", (subcategory,))
     else:
         cursor.execute("SELECT * FROM inventory")
+
     rows = cursor.fetchall()
 
     # Convert rows into a list of dictionaries
@@ -63,7 +68,8 @@ conn.close()
 @app.route('/api/inventory', methods=['GET'])
 def get_inventory():
     category = request.args.get('category')
-    inventory_data = get_inventory_data(category)
+    subcategory = request.args.get('subcategory')
+    inventory_data = get_inventory_data(category, subcategory)
     return jsonify({"inventory": inventory_data})
 
 if __name__ == '__main__':

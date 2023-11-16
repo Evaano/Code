@@ -19,23 +19,37 @@ interface InventoryItem {
 export default function Inventory() {
     const [data, setData] = useState<InventoryItem[]>([]);
     const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+    const [subcategoryFilter, setSubcategoryFilter] = useState<string | null>(null);
     const [isFilterExpanded, setIsFilterExpanded] = useState(false);
 
     useEffect(() => {
         let url = 'http://127.0.0.1:5000/api/inventory';
+        const queryParams: string[] = [];
+
         if (categoryFilter) {
-            url += '?category=' + encodeURIComponent(categoryFilter);
+            queryParams.push(`category=${encodeURIComponent(categoryFilter)}`);
         }
+
+        if (subcategoryFilter) {
+            queryParams.push(`subcategory=${encodeURIComponent(subcategoryFilter)}`);
+        }
+
+        if (queryParams.length > 0) {
+            url += '?' + queryParams.join('&');
+        }
+
+        console.log('API URL:', url);
+        console.log('Selected Subcategory Filter:', subcategoryFilter);
 
         axios.get(url)
             .then(response => {
+                console.log('API Response:', response.data);
                 setData(response.data.inventory);
             })
             .catch(error => {
                 console.error('Error fetching data: ', error);
             });
-    }, [categoryFilter]);
-
+    }, [categoryFilter, subcategoryFilter]);
 
     const rows = data.map((item: InventoryItem) => (
         <Table.Tr key={item.item_code}>
@@ -52,49 +66,75 @@ export default function Inventory() {
         </Table.Tr>
     ));
 
-    return (
-        <div>
-            <button 
-            style={{ backgroundColor: 'white', outline: 'none'}} 
+    const subcategoryOptions = categoryFilter === 'General Items' ? [
+        { value: '', label: 'All' },
+        { value: 'General Items', label: 'General Items' },
+        { value: 'Printed Items', label: 'Printed Items' },
+        { value: 'Stationary', label: 'Stationary'},
+        { value: 'Toners, Cartridges & Drums', label: 'Toners, Cartridges & Drums'}
+    ] : categoryFilter === 'Medical Items' ? [
+        { value: '', label: 'All' },
+        { value: 'Laboratory Consumables', label: 'Laboratory Consumables' },
+        { value: 'Laboratory Instruments', label: 'Laboratory Instruments' },
+        { value: 'Laboratory Test Kits', label: 'Laboratory Test Kits' },
+        { value: 'Medical Consumable', label: 'Medical Consumable' },
+        { value: 'Medical Intruments', label: 'Medical Intruments' },
+        { value: 'Oncology Items', label: 'Oncology Items' },
+        { value: 'Pharmaceuticals', label: 'Pharmaceuticals' },
+        { value: 'Radiology Items', label: 'Radiology Items' }
+    ] : categoryFilter === 'Narcotic' ? [
+        { value: '', label: 'All' },
+        { value: 'Narcotic', label: 'Controlled Drugs' }
+    ] : [];
+
+return (
+    <div>
+        <button
+            style={{ backgroundColor: 'white', outline: 'none' }}
             onClick={() => setIsFilterExpanded(!isFilterExpanded)}>
-                <FaFilter style={{ color: 'gray', fontSize: '10px' }}/>
-            </button>
+            <FaFilter style={{ color: 'gray', fontSize: '10px' }} />
+        </button>
 
-            {isFilterExpanded && (
-                <Select
-                    data={[
-                        { value: '', label: 'All' },
-                        { value: 'General Items', label: 'General Items' },
-                        { value: 'Medical Items', label: 'Medical Items' },
-                        { value: 'Narcotic', label: 'Narcotics' },
-                    ]}
+        {isFilterExpanded && (
+            <><Select
+                data={[
+                    { value: '', label: 'All' },
+                    { value: 'General Items', label: 'General Items' },
+                    { value: 'Medical Items', label: 'Medical Items' },
+                    { value: 'Narcotic', label: 'Narcotic' },
+                ]}
+                size='sm'
+                value={categoryFilter || ''}
+                placeholder='Filter by category'
+                onChange={value => setCategoryFilter(value)}
+                style={{ width: '200px', marginLeft: '10px', display: 'inline-block' }} /><Select
+                    data={subcategoryOptions}
                     size='sm'
-                    value={categoryFilter || ''}
-                    placeholder='Filter by category'
-                    onChange={value => setCategoryFilter(value)}
-                    style={{ width: '200px', marginLeft: '10px', display: 'inline-block' }}
-                />
-            )}
+                    value={subcategoryFilter || ''}
+                    placeholder='Filter by subcategory'
+                    onChange={value => setSubcategoryFilter(value)}
+                    style={{ width: '200px', marginLeft: '10px', display: 'inline-block' }} /></>
+        )}
 
-            <ScrollArea w={1430} h={750}>
-                <Table>
-                    <Table.Thead>
-                        <Table.Tr>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Code</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Description</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Category</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Subcategory</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Unit</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Brand</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Inwards</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Outwards</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Current Stock</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Reorder</Table.Th>
-                        </Table.Tr>
-                    </Table.Thead>
-                    <Table.Tbody>{rows}</Table.Tbody>
-                </Table>
-            </ScrollArea>
-        </div>
-    );
+        <ScrollArea w={1430} h={730}>
+            <Table>
+                <Table.Thead>
+                    <Table.Tr>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Code</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Description</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Category</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Subcategory</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Unit</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Brand</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Inwards</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Outwards</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Current Stock</Table.Th>
+                        <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Reorder</Table.Th>
+                    </Table.Tr>
+                </Table.Thead>
+                <Table.Tbody>{rows}</Table.Tbody>
+            </Table>
+        </ScrollArea>
+    </div>
+);
 }
