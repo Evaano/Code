@@ -45,18 +45,13 @@ export default function Hero() {
         height: rem(356),
     };
 
-    const highlightStyle = {
-        position: 'relative',
-        backgroundColor: 'var(--mantine-color-blue-light)',
-        borderRadius: 'var(--mantine-radius-sm)',
-        padding: `${rem(4)} ${rem(12)}`,
-    };
-
     return (
         <Container 
         size="md"
         style={{
             margin: '100px 200px',
+            height: '80vh', 
+            width: '100vw'
         }}>
             <div style={innerStyle}>
                 <div style={contentStyle}>

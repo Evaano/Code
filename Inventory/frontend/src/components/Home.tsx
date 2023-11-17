@@ -3,7 +3,7 @@ import HeroPage from './HeroPage'
 
 const Home = () => {
   return (
-    <div >
+    <div>
         <HeroPage />
     </div>
   )
