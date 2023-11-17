@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './Navbar';
 import Hero from './Hero';
 import Inventory from './Inventory';
+import AddItemPage from './AddItemPage';
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Hero />} />
                         <Route path="/inventory" element={<Inventory />} />
+                        <Route path="/new-item" element={<AddItemPage />} />
                     </Routes>
                 </div>
             </div>
