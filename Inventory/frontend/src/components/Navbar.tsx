@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Center, Stack } from '@mantine/core';
+import { Center, Tooltip, UnstyledButton, Stack, rem } from '@mantine/core';
 import {
     IconHome2,
     IconGauge,
@@ -13,21 +14,24 @@ import {
     IconSwitchHorizontal,
 } from '@tabler/icons-react';
 import { MantineLogo } from '@mantine/ds';
-import NavbarLink from './NavbarLink';
+import classes from './NavbarMinimal.module.css';
 
-const navbarStyles = {
-    width: '80px',
-    height: '100vh',
-    padding: 'var(--mantine-spacing-md)',
-    display: 'flex',
-    flexDirection: 'column' as 'column',
-    backgroundColor: '#67c369',
-};
+interface NavbarLinkProps {
+    icon: typeof IconHome2;
+    label: string;
+    active?: boolean;
+    onClick?(): void;
+}
 
-const navbarMainStyles = {
-    flex: '1',
-    marginTop: '50px',
-};
+function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
+    return (
+        <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
+            <UnstyledButton onClick={onClick} className={classes.link} data-active={active || undefined}>
+                <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+            </UnstyledButton>
+        </Tooltip>
+    );
+}
 
 const mockdata = [
     { icon: IconHome2, label: 'Home', path: '/' },
@@ -35,13 +39,12 @@ const mockdata = [
     { icon: IconDeviceDesktopAnalytics, label: 'Add New Item', path: '/new-item' },
     { icon: IconCalendarStats, label: 'Update Items', path: '/update-items' },
     { icon: IconUser, label: 'Account', path: '/account' },
-    { icon: IconFingerprint, label: 'Security', path: '/security' },
     { icon: IconSettings, label: 'Settings', path: '/settings' },
 ];
 
-const Navbar = () => {
+export default function NavbarMinimalColored() {
+    const [active, setActive] = useState(2);
     const navigate = useNavigate();
-    const [active, setActive] = useState(0);
 
     const links = mockdata.map((link, index) => (
         <NavbarLink
@@ -56,23 +59,20 @@ const Navbar = () => {
     ));
 
     return (
-        <nav style={navbarStyles}>
+        <nav className={classes.navbar}>
             <Center>
                 <MantineLogo type="mark" inverted size={30} />
             </Center>
 
-            <div style={navbarMainStyles}>
+            <div className={classes.navbarMain}>
                 <Stack justify="center" gap={0}>
                     {links}
                 </Stack>
             </div>
 
             <Stack justify="center" gap={0}>
-                <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
                 <NavbarLink icon={IconLogout} label="Logout" />
             </Stack>
         </nav>
     );
-};
-
-export default Navbar;
+}

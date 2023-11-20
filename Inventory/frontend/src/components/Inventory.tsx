@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, ScrollArea, Select, Pagination, Group } from '@mantine/core';
 import axios from 'axios';
 import { FaFilter } from 'react-icons/fa';
-
+import './Inventory.css';
 interface InventoryItem {
     item_code: string;
     item_description: string;
@@ -101,54 +101,64 @@ export default function Inventory() {
     ] : [];
 
     return (
-        <div style={{ height: '90vh', width: '90vw', overflow: 'hidden', marginTop: '38px' }}>
-            <button
-                style={{ backgroundColor: 'white', outline: 'none' }}
-                onClick={() => setIsFilterExpanded(!isFilterExpanded)}>
-                <FaFilter style={{ color: 'gray', fontSize: '10px' }} />
-            </button>
+        <div className="container">
+            <div className="filter-container">
+                <button
+                    className="filter-button"
+                    onClick={() => setIsFilterExpanded(!isFilterExpanded)}>
+                    <FaFilter style={{ color: 'gray', fontSize: '10px' }} />
+                </button>
 
-            {isFilterExpanded && (
-                <><Select
-                    data={[
-                        { value: '', label: 'All' },
-                        { value: 'General Items', label: 'General Items' },
-                        { value: 'Medical Items', label: 'Medical Items' },
-                        { value: 'Narcotic', label: 'Narcotic' },
-                    ]}
-                    size='sm'
-                    value={categoryFilter || ''}
-                    placeholder='Filter by category'
-                    onChange={value => setCategoryFilter(value)}
-                    style={{ width: '200px', marginLeft: '10px', display: 'inline-block' }} /><Select
-                        data={subcategoryOptions}
-                        size='sm'
-                        value={subcategoryFilter || ''}
-                        placeholder='Filter by subcategory'
-                        onChange={value => setSubcategoryFilter(value)}
-                        style={{ width: '200px', marginLeft: '10px', display: 'inline-block' }} /></>
-            )}
+                {isFilterExpanded && (
+                    <>
+                        <Select
+                            data={[
+                                { value: '', label: 'All' },
+                                { value: 'General Items', label: 'General Items' },
+                                { value: 'Medical Items', label: 'Medical Items' },
+                                { value: 'Narcotic', label: 'Narcotic' },
+                            ]}
+                            size='sm'
+                            value={categoryFilter || ''}
+                            placeholder='Filter by category'
+                            onChange={value => setCategoryFilter(value)}
+                            className="filter-select"
+                        />
+                        <Select
+                            data={subcategoryOptions}
+                            size='sm'
+                            value={subcategoryFilter || ''}
+                            placeholder='Filter by subcategory'
+                            onChange={value => setSubcategoryFilter(value)}
+                            className="filter-select"
+                        />
+                    </>
+                )}
+            </div>
 
-            <ScrollArea style={{ height: '80vh', width: '90vw' }}>
-                <Table>
-                    <Table.Thead>
-                        <Table.Tr>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Code</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Description</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Category</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Subcategory</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Unit</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Brand</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Inwards</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Outwards</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Current Stock</Table.Th>
-                            <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Reorder</Table.Th>
-                        </Table.Tr>
-                    </Table.Thead>
-                    <Table.Tbody style={{ marginLeft: '20px'}}>{rows}</Table.Tbody>
-                </Table>
-            </ScrollArea>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="table-container">
+                <ScrollArea style={{ height: '80vh', width: '100%' }}>
+                    <Table>
+                        <Table.Thead>
+                            <Table.Tr>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Code</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff', overflow: 'hidden' }}>Item Description</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Category</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Subcategory</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Unit</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Brand</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Inwards</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Outwards</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Current Stock</Table.Th>
+                                <Table.Th style={{ position: 'sticky', top: 0, backgroundColor: '#fff' }}>Reorder</Table.Th>
+                            </Table.Tr>
+                        </Table.Thead>
+                        <Table.Tbody style={{ marginLeft: '20px' }}>{rows}</Table.Tbody>
+                    </Table>
+                </ScrollArea>
+            </div>
+
+            <div className="pagination-container">
                 <Pagination
                     total={pageCount}
                     value={currentPage}

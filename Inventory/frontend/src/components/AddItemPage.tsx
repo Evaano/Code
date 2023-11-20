@@ -57,7 +57,7 @@ const AddItemPage = () => {
 
     setError("");
     try {
-      const response = await fetch("http://localhost:5000/api/addItem", {
+      const response = await fetch("http://localhost:5000/api/add-item", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

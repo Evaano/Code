@@ -3,9 +3,13 @@ from flask_cors import CORS
 import sqlite3
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
-conn = sqlite3.connect("inventory.db")
+def connect_to_database():
+    return sqlite3.connect("inventory.db")
+
+
+conn = connect_to_database()
 conn.execute("PRAGMA case_sensitive_like = OFF")  # Ensure case-insensitive behavior
 conn.execute(
     """
@@ -26,7 +30,7 @@ conn.execute(
 conn.commit()
 
 def get_inventory_data(category=None, subcategory=None):
-    conn = sqlite3.connect("inventory.db")
+    conn = connect_to_database()
     cursor = conn.cursor()
     if category and subcategory:
         cursor.execute("SELECT * FROM inventory WHERE category = ? AND subcategory = ?", (category, subcategory))
@@ -81,7 +85,7 @@ def add_item_to_database(
         return jsonify({"error": "Invalid input for numeric fields. Item not added."}), 400
 
     current_stock = inwards - outwards
-    conn = sqlite3.connect("inventory.db")
+    conn = connect_to_database()
     cursor = conn.cursor()
 
     cursor.execute("SELECT item_code FROM inventory WHERE item_code=?", (item_code,))
@@ -120,7 +124,7 @@ def add_item_to_database(
 
 def get_max_item_code():
     try:
-        conn = sqlite3.connect("inventory.db")
+        conn = connect_to_database()
         cursor = conn.cursor()
         cursor.execute("SELECT MAX(item_code) FROM inventory")
         result = cursor.fetchone()
@@ -146,11 +150,123 @@ def get_inventory():
     inventory_data = get_inventory_data(category, subcategory)
     return jsonify({"inventory": inventory_data})
 
-@app.route('/api/addItem', methods=['POST'])
+@app.route('/api/add-item', methods=['POST'])
 def add_item():
     data = request.json
     
     result = add_item_to_database(
+        data['item_code'],
+        data['item_description'],
+        data['category'],
+        data['subcategory'],
+        data['unit'],
+        data['brand'],
+        data['inwards'],
+        data['outwards'],
+        data['reorder'],
+    )
+    return result
+
+@app.route('/get-item-descriptions', methods=['GET'])
+def get_item_descriptions():
+    conn = connect_to_database()
+    cursor = conn.cursor()
+
+    input_value = request.args.get('input', '')  # Get the input value from the query parameter
+    cursor.execute("SELECT item_description FROM inventory WHERE item_description LIKE ?", ('%' + input_value + '%',))
+    descriptions = [row[0] for row in cursor.fetchall()]
+
+    conn.close()
+
+    return jsonify(descriptions)
+
+
+@app.route('/search-item', methods=['POST'])
+def search_item():
+    data = request.get_json()
+
+    selected_option = data.get('selected_option', '')
+    item_to_update = selected_option
+
+    conn = connect_to_database()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM inventory WHERE item_code=? OR item_description=?",
+        (item_to_update, item_to_update),
+    )
+    existing_item = cursor.fetchone()
+
+    if existing_item:
+        item = {
+            "item_code": existing_item[0],
+            "item_description": existing_item[1],
+            "category": existing_item[2],
+            "subcategory": existing_item[3],
+            "unit": existing_item[4],
+            "brand": existing_item[5],
+            "inwards": existing_item[6],
+            "outwards": existing_item[7],
+            "current_stock": existing_item[8],
+            "reorder": existing_item[9],
+        }
+    else:
+        conn.close()
+        return jsonify({"error": "Item not found"}), 404
+
+    conn.close()
+
+    return jsonify(item)
+
+def update_item_in_database(
+    item_code,
+    item_description,
+    category,
+    subcategory,
+    unit,
+    brand,
+    inwards,
+    outwards,
+    reorder,
+):
+    try:
+        inwards = int(inwards)
+        outwards = int(outwards)
+    except ValueError:
+        return jsonify({"error": "Invalid input for numeric fields. Item not updated."}), 400
+
+    current_stock = inwards - outwards
+    conn = connect_to_database()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE inventory
+        SET item_description=?, category=?, subcategory=?, unit=?, brand=?, inwards=?, outwards=?, current_stock=?, reorder=?
+        WHERE item_code=?
+        """,
+        (
+            item_description,
+            category,
+            subcategory,
+            unit,
+            brand,
+            inwards,
+            outwards,
+            current_stock,
+            reorder,
+            item_code,
+        ),
+    )
+    conn.commit()
+    conn.close()
+    return jsonify({"message": f"Updated item '{item_description}' in the inventory."})
+
+@app.route('/api/update-item', methods=['PUT'])
+def update_item():
+    data = request.json
+
+    result = update_item_in_database(
         data['item_code'],
         data['item_description'],
         data['category'],
