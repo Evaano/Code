@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TextInput, Button, Select, Text, Notification } from "@mantine/core";
+import { TextInput, Button, Select, Text, Notification, Title } from "@mantine/core";
 import classes from "./ContainedInput.module.css";
 
 const subcategories = {
@@ -95,82 +95,84 @@ const AddItemPage = () => {
   };
 
   return (
-    <div style={{ width: "43vw", margin: "50px auto", alignItems: "center" }}>
-      <TextInput
-        label="Item Code"
-        value={itemCode}
-        onChange={(event) => setItemCode(Number(event.currentTarget.value))}
-        error={!itemCode && "Item Code is required"}
-        classNames={classes}
-      />
-      <TextInput
-        label="Item Description"
-        value={itemDescription}
-        onChange={(event) => setItemDescription(event.currentTarget.value)}
-        error={!itemDescription && "Item Description is required"}
-        classNames={classes}
-      />
-      <Select
-        mt="md"
-        comboboxProps={{ withinPortal: true }}
-        label="Category"
-        placeholder="Pick one"
-        data={Object.keys(subcategories)}
-        value={category}
-        onChange={handleCategoryChange}
-        classNames={classes}
-        error={!category && "Category is required"}
-        style={{ display: "inline-block" }}
-      />
-      <Select
-        mt="md"
-        label="Subcategory"
-        data={subcategories[category]}
-        value={subcategory}
-        placeholder="Pick one"
-        onChange={handleSubcategoryChange}
-        classNames={classes}
-        error={!subcategory && "Subcategory is required"}
-        style={{ display: "inline-block" }}
-      />
-      <TextInput
-        label="Unit"
-        value={unit}
-        onChange={(event) => setUnit(event.currentTarget.value)}
-        error={!unit && "Unit is required"}
-        classNames={classes}
-        style={{ display: "inline-block" }}
-      />
-      <TextInput
-        label="Brand"
-        placeholder="Optional"
-        value={brand}
-        onChange={(event) => setBrand(event.currentTarget.value)}
-        classNames={classes}
-      />
-      <TextInput
-        type="number"
-        label="Inwards"
-        value={inwards}
-        onChange={(event) => setInwards(Number(event.currentTarget.value))}
-        classNames={classes}
-      />
-      <TextInput
-        type="number"
-        label="Outwards"
-        value={outwards}
-        onChange={(event) => setOutwards(Number(event.currentTarget.value))}
-        classNames={classes}
-      />
-      <TextInput
-        type="number"
-        label="Reorder"
-        value={reorder}
-        onChange={(event) => setReorder(Number(event.currentTarget.value))}
-        classNames={classes}
-      />
-      {success && <Notification>{success}</Notification>}
-      <Button onClick={handleAddItem} style={{ margin: '10px' }}>Add Item</Button>
+    <div style={{ width: "90vw", display: "flex", justifyContent: "center", alignItems: "center", marginTop: '20px', marginLeft: '20px' }}>
+      <div style={{ width: "44vw" }}>
+        <Title order={1}><Text span c="blue" inherit>Add</Text>  a New Item to the Inventory</Title>
+        <TextInput
+          label="Item Code"
+          value={itemCode}
+          onChange={(event) => setItemCode(Number(event.currentTarget.value))}
+          error={!itemCode && "Item Code is required"}
+          classNames={classes}
+          style={{ width: "100px", marginTop: '20px' }}
+        />
+        <TextInput
+          label="Item Description"
+          value={itemDescription}
+          onChange={(event) => setItemDescription(event.currentTarget.value)}
+          error={!itemDescription && "Item Description is required"}
+          classNames={classes}
+        />
+        <Select
+          comboboxProps={{ withinPortal: true }}
+          label="Category"
+          placeholder="Pick one"
+          data={Object.keys(subcategories)}
+          value={category}
+          onChange={handleCategoryChange}
+          classNames={classes}
+          error={!category && "Category is required"}
+          style={{ display: "inline-block" }}
+        />
+        <Select
+          label="Subcategory"
+          data={subcategories[category]}
+          value={subcategory}
+          placeholder="Pick one"
+          onChange={handleSubcategoryChange}
+          classNames={classes}
+          error={!subcategory && "Subcategory is required"}
+          style={{ display: "inline-block" }}
+        />
+        <TextInput
+          label="Unit"
+          value={unit}
+          onChange={(event) => setUnit(event.currentTarget.value)}
+          error={!unit && "Unit is required"}
+          classNames={classes}
+          style={{ display: "inline-block" }}
+        />
+        <TextInput
+          label="Brand"
+          placeholder="Optional"
+          value={brand}
+          onChange={(event) => setBrand(event.currentTarget.value)}
+          classNames={classes}
+        />
+        <TextInput
+          type="number"
+          label="Inwards"
+          value={inwards}
+          onChange={(event) => setInwards(Number(event.currentTarget.value))}
+          classNames={classes}
+        />
+        <TextInput
+          type="number"
+          label="Outwards"
+          value={outwards}
+          onChange={(event) => setOutwards(Number(event.currentTarget.value))}
+          classNames={classes}
+        />
+        <TextInput
+          type="number"
+          label="Reorder"
+          value={reorder}
+          onChange={(event) => setReorder(Number(event.currentTarget.value))}
+          classNames={classes}
+        />
+        {success && <Notification>{success}</Notification>}
+        <Button onClick={handleAddItem} style={{ margin: '10px' }}>Add Item</Button>
+      </div>
     </div>
   );
 };

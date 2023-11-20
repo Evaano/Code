@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Table, ScrollArea, Select, Pagination, Group } from '@mantine/core';
 import axios from 'axios';
 import { FaFilter } from 'react-icons/fa';
-import './Inventory.css';
 interface InventoryItem {
     item_code: string;
     item_description: string;
@@ -101,10 +100,10 @@ export default function Inventory() {
     ] : [];
 
     return (
-        <div className="container">
-            <div className="filter-container">
+        <div style={{ height: '90vh', marginLeft: '20px'}}>
+            <div style={{ display: 'flex', alignItems: 'center', margin: '10px'}}>
                 <button
-                    className="filter-button"
+                    style={{ border: 'none', backgroundColor: 'transparent' }}
                     onClick={() => setIsFilterExpanded(!isFilterExpanded)}>
                     <FaFilter style={{ color: 'gray', fontSize: '10px' }} />
                 </button>
@@ -122,7 +121,7 @@ export default function Inventory() {
                             value={categoryFilter || ''}
                             placeholder='Filter by category'
                             onChange={value => setCategoryFilter(value)}
-                            className="filter-select"
+                            style={{ marginLeft: '10px', marginRight: '10px'}}
                         />
                         <Select
                             data={subcategoryOptions}
@@ -137,7 +136,7 @@ export default function Inventory() {
             </div>
 
             <div className="table-container">
-                <ScrollArea style={{ height: '80vh', width: '100%' }}>
+                <ScrollArea style={{ height: '75vh', width: '90vw' }}>
                     <Table>
                         <Table.Thead>
                             <Table.Tr>
@@ -158,7 +157,7 @@ export default function Inventory() {
                 </ScrollArea>
             </div>
 
-            <div className="pagination-container">
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                     total={pageCount}
                     value={currentPage}

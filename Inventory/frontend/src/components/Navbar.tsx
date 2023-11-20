@@ -59,20 +59,22 @@ export default function NavbarMinimalColored() {
     ));
 
     return (
-        <nav className={classes.navbar}>
-            <Center>
-                <MantineLogo type="mark" inverted size={30} />
-            </Center>
+        <div style={{ width: '80px', position: 'sticky', top: 0, borderRight: '1px solid #ddd' }}>
+            <nav className={classes.navbar}>
+                <Center>
+                    <MantineLogo type="mark" inverted size={30} />
+                </Center>
 
-            <div className={classes.navbarMain}>
+                <div className={classes.navbarMain}>
+                    <Stack justify="center" gap={0}>
+                        {links}
+                    </Stack>
+                </div>
+
                 <Stack justify="center" gap={0}>
-                    {links}
+                    <NavbarLink icon={IconLogout} label="Logout" />
                 </Stack>
-            </div>
-
-            <Stack justify="center" gap={0}>
-                <NavbarLink icon={IconLogout} label="Logout" />
-            </Stack>
-        </nav>
+            </nav>
+        </div>
     );
 }
