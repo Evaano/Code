@@ -1,65 +1,20 @@
 import React from 'react';
-import heroImage from '../assets/hero.png';
-import {
-    Image,
-    Container,
-    Title,
-    Button,
-    Group,
-    Text,
-    List,
-    ThemeIcon,
-    rem,
-} from '@mantine/core';
+import { Image, Container, Title, Button, Group, Text, List, ThemeIcon, rem } from '@mantine/core';
 import { IconCheck } from '@tabler/icons-react';
+import image from '../assets/hero.png';
+import classes from './HeroBullets.module.css';
 
 export default function Hero() {
-    const innerStyle = {
-        display: 'flex',
-        justifyContent: 'space-between',
-        paddingTop: `calc(${rem(16)} * 4)`,
-        paddingBottom: `calc(${rem(16)} * 4)`,
-    };
-
-    const contentStyle = {
-        maxWidth: rem(480),
-        marginRight: `calc(${rem(16)} * 3)`,
-    };
-
-    const titleStyle = {
-        color: 'light-dark(var(--mantine-color-black), var(--mantine-color-white))',
-        fontFamily: 'Greycliff CF, var(--mantine-font-family)',
-        fontSize: rem(44),
-        lineHeight: 1.2,
-        fontWeight: 900,
-    };
-
-    const controlStyle = {
-        '@media (maxWidth: $mantineBreakpointXs)': {
-            flex: 1,
-        },
-    };
-
-    const imageStyle = {
-        width: rem(376),
-        height: rem(356),
-    };
-
     return (
-        <Container 
-        size="md"
-        style={{
-            margin: '100px 200px',
-            height: '80vh', 
-            width: '100vw'
-        }}>
-            <div style={innerStyle}>
-                <div style={contentStyle}>
-                    <Title style={titleStyle}>
-                        A modern <span style={{ color: '#08a4da' }}>React</span> <br /> based inventory app
+        <Container size="md">
+            <div className={classes.inner}>
+                <div className={classes.content}>
+                    <Title className={classes.title}>
+                        A Modern <Text span c="green" inherit>React</Text> Based Inventory App
                     </Title>
                     <Text c="dimmed" mt="md">
-                        Streamline your inventory process with our user-friendly React app built using Mantine components.
+                        Build fully functional accessible web applications faster than ever – Mantine includes
+                        more than 120 customizable components and hooks to cover you in any situation
                     </Text>
 
                     <List
@@ -73,26 +28,25 @@ export default function Hero() {
                         }
                     >
                         <List.Item>
-                            <b>TypeScript based</b> – Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            <b>TypeScript based</b> – build type safe applications, all components and hooks
+                            export types
                         </List.Item>
                         <List.Item>
-                            <b>Free and open source</b> – Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        </List.Item>
-                        <List.Item>
-                            <b>No annoying focus ring</b> – Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            <b>Mantine UI</b> – set of components and hooks based on React and TypeScript
+                            keyboard
                         </List.Item>
                     </List>
 
                     <Group mt={30}>
-                        <Button radius="xl" size="md" style={controlStyle} >
+                        <Button radius="xl" size="md" className={classes.control}>
                             Get started
                         </Button>
-                        <Button variant="default" radius="xl" size="md" style={controlStyle}>
+                        <Button variant="default" radius="xl" size="md" className={classes.control}>
                             Source code
                         </Button>
                     </Group>
                 </div>
-                <Image src={heroImage} style={imageStyle} />
+                <Image src={image} className={classes.image} />
             </div>
         </Container>
     );

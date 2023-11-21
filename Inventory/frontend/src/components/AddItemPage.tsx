@@ -22,6 +22,14 @@ const subcategories = {
   Narcotic: ["Controlled Drugs"],
 };
 
+const units = [
+  "Ampule", "Bag", "Bottle", "Bottles",
+  "Box", "Can", "Caps", "Case", "Kit",
+  "Meter", "Numbers", "Packet", "Pad", "Pair",
+  "Pieces", "Ream", "Roll", "Set", "Sheet",
+  "Sheets", "Tab", "Tablet", "Tin", "Tube", "Unit",
+  "Vial", "Vials"];
+
 const AddItemPage = () => {
   const [itemCode, setItemCode] = useState(0);
   const [itemDescription, setItemDescription] = useState("");
@@ -75,16 +83,19 @@ const AddItemPage = () => {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Failed to add item: ${response.statusText}`);
-      }
+      const data = await response.json();
 
-      setSuccess("Item added successfully!");
-      console.log("Item added successfully!");
+      if (response.ok) {
+        setSuccess("Item added successfully!");
+        console.log("Item added successfully!");
+      } else {
+        setError(data.error);
+      }
     } catch (error) {
       console.error("Error adding item:", error);
     }
   };
+
 
   const handleCategoryChange = (value) => {
     setCategory(value);
@@ -97,7 +108,7 @@ const AddItemPage = () => {
   return (
     <div style={{ width: "90vw", display: "flex", justifyContent: "center", alignItems: "center", marginTop: '20px', marginLeft: '20px' }}>
       <div style={{ width: "44vw" }}>
-        <Title order={1}><Text span c="blue" inherit>Add</Text>  a New Item to the Inventory</Title>
+        <Title order={1}><Text span c="green" inherit>Add</Text>  a New Item to the Inventory</Title>
         <TextInput
           label="Item Code"
           value={itemCode}
@@ -134,14 +145,18 @@ const AddItemPage = () => {
           error={!subcategory && "Subcategory is required"}
           style={{ display: "inline-block" }}
         />
-        <TextInput
+        <Select
           label="Unit"
+          data={units}
           value={unit}
-          onChange={(event) => setUnit(event.currentTarget.value)}
+          placeholder="Pick one"
+          onChange={(value) => setUnit(value)}
           error={!unit && "Unit is required"}
           classNames={classes}
           style={{ display: "inline-block" }}
         />
+
+
         <TextInput
           label="Brand"
           placeholder="Optional"
@@ -171,6 +186,7 @@ const AddItemPage = () => {
           classNames={classes}
         />
         {success && <Notification>{success}</Notification>}
+        {error && <Notification>{error}</Notification>}
         <Button onClick={handleAddItem} style={{ margin: '10px' }}>Add Item</Button>
       </div>
     </div>
