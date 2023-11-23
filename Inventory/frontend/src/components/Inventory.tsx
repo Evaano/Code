@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, ScrollArea, Select, Pagination, Group } from '@mantine/core';
+import { Table, ScrollArea, Select, Pagination, Input } from '@mantine/core';
 import axios from 'axios';
 import { FaFilter } from 'react-icons/fa';
 interface InventoryItem {
@@ -21,6 +21,7 @@ export default function Inventory() {
     const [subcategoryFilter, setSubcategoryFilter] = useState<string | null>(null);
     const [isFilterExpanded, setIsFilterExpanded] = useState(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [searchTerm, setSearchTerm] = useState<string>('');
     const itemsPerPage = 14;
 
     useEffect(() => {
@@ -57,7 +58,16 @@ export default function Inventory() {
 
     const paginatedData = data.slice(startIndex, endIndex);
 
-    const rows = paginatedData.map((item: InventoryItem) => (
+    const filteredData = data.filter((item) => {
+        const searchTermLower = searchTerm.toLowerCase();
+        return (
+            item.item_description.toLowerCase().includes(searchTermLower)
+        );
+    });
+    
+    const paginatedFilteredData = filteredData.slice(startIndex, endIndex);
+
+    const rows = paginatedFilteredData.map((item: InventoryItem) => (
         <Table.Tr key={item.item_code}>
             <Table.Td>{item.item_code}</Table.Td>
             <Table.Td>{item.item_description}</Table.Td>
@@ -72,11 +82,17 @@ export default function Inventory() {
         </Table.Tr>
     ));
 
+
     const pageCount = Math.ceil(data.length / itemsPerPage);
 
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     }
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
 
     const subcategoryOptions = categoryFilter === 'General Items' ? [
         { value: '', label: 'All' },
@@ -100,8 +116,8 @@ export default function Inventory() {
     ] : [];
 
     return (
-        <div style={{ height: '90vh', marginLeft: '20px'}}>
-            <div style={{ display: 'flex', alignItems: 'center', margin: '10px'}}>
+        <div style={{ height: '90vh', marginLeft: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
                 <button
                     style={{ border: 'none', backgroundColor: 'transparent' }}
                     onClick={() => setIsFilterExpanded(!isFilterExpanded)}>
@@ -121,7 +137,7 @@ export default function Inventory() {
                             value={categoryFilter || ''}
                             placeholder='Filter by category'
                             onChange={value => setCategoryFilter(value)}
-                            style={{ marginLeft: '10px', marginRight: '10px'}}
+                            style={{ marginLeft: '10px', marginRight: '10px' }}
                         />
                         <Select
                             data={subcategoryOptions}
@@ -133,6 +149,16 @@ export default function Inventory() {
                         />
                     </>
                 )}
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', margin: '10px 0px' }}>
+                <Input
+                    type="text"
+                    placeholder="Search"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    style={{ marginLeft: '10px', marginRight: '10px' }}
+                />
             </div>
 
             <div className="table-container">
